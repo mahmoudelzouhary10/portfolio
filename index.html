@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mahmoud Elzouhary — Mobile &amp; Web Developer</title>
+<meta name="description" content="Mahmoud Elzouhary — mobile and web developer. I build complete, working products with Flutter, Firebase, and the web." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0c0e1a;
+    --ink-2:#13162a;
+    --ink-3:#1b1f38;
+    --line:#2a2f52;
+    --fog:#9aa0c4;
+    --paper:#eef0ff;
+    --violet:#8b6bff;
+    --violet-bright:#a98bff;
+    --gold:#f3c969;
+    --gold-deep:#d8a73f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--ink)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+  .mono{font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--fog)}
+
+  /* ---- nav ---- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(12px);
+    background:rgba(12,14,26,.72);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s;
+  }
+  nav.scrolled{border-bottom-color:var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  nav .brand{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.05rem;letter-spacing:-.01em}
+  nav .brand span{color:var(--gold)}
+  nav .links{display:flex;gap:26px}
+  nav .links a{font-size:.9rem;color:var(--fog);transition:color .2s}
+  nav .links a:hover,nav .links a:focus-visible{color:var(--paper)}
+  @media(max-width:620px){nav .links{display:none}}
+
+  /* ---- hero ---- */
+  header{position:relative;padding:160px 0 110px;overflow:hidden}
+  .glow{
+    position:absolute;border-radius:50%;filter:blur(120px);opacity:.5;z-index:0;pointer-events:none;
+  }
+  .glow.v{width:520px;height:520px;background:#5a3fd6;top:-160px;right:-120px}
+  .glow.g{width:380px;height:380px;background:#7a5d1f;bottom:-160px;left:-120px}
+  header .wrap{position:relative;z-index:1}
+  .status{display:inline-flex;align-items:center;gap:9px;margin-bottom:30px;padding:7px 14px;border:1px solid var(--line);border-radius:100px;background:var(--ink-2)}
+  .status .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(243,201,105,.6);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(243,201,105,.55)}70%{box-shadow:0 0 0 9px rgba(243,201,105,0)}100%{box-shadow:0 0 0 0 rgba(243,201,105,0)}}
+  h1{
+    font-family:'Bricolage Grotesque';font-weight:800;
+    font-size:clamp(2.6rem,7.5vw,5.3rem);line-height:1.02;letter-spacing:-.025em;
+    max-width:15ch;
+  }
+  h1 .grad{
+    background:linear-gradient(105deg,var(--gold) 0%,var(--violet-bright) 70%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .lede{margin-top:28px;max-width:54ch;font-size:1.14rem;color:#c5c9e8}
+  .cta-row{margin-top:40px;display:flex;flex-wrap:wrap;gap:14px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:10px;
+    font-weight:600;font-size:.95rem;transition:transform .15s,box-shadow .2s,background .2s,border-color .2s;
+  }
+  .btn-primary{background:var(--gold);color:var(--ink)}
+  .btn-primary:hover,.btn-primary:focus-visible{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(243,201,105,.5)}
+  .btn-ghost{border:1px solid var(--line);color:var(--paper)}
+  .btn-ghost:hover,.btn-ghost:focus-visible{border-color:var(--violet);background:var(--ink-2);transform:translateY(-2px)}
+
+  /* ---- section frame ---- */
+  section{padding:84px 0;position:relative}
+  .eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:26px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+  .sec-title{font-family:'Bricolage Grotesque';font-weight:800;font-size:clamp(1.7rem,3.6vw,2.5rem);letter-spacing:-.02em;line-height:1.1}
+
+  /* ---- about ---- */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:54px;align-items:start}
+  @media(max-width:760px){.about-grid{grid-template-columns:1fr;gap:34px}}
+  .about-grid p{color:#c5c9e8;font-size:1.05rem;margin-bottom:16px}
+  .about-grid p strong{color:var(--paper);font-weight:600}
+  .facts{border:1px solid var(--line);border-radius:14px;background:var(--ink-2);padding:26px}
+  .facts .row{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+  .facts .row:last-child{border-bottom:0}
+  .facts .k{color:var(--fog);font-size:.92rem}
+  .facts .val{font-weight:600;text-align:right;font-size:.92rem}
+
+  /* ---- projects ---- */
+  .proj{display:grid;grid-template-columns:1fr;gap:22px}
+  .card{
+    position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    background:var(--ink-2);transition:transform .2s,border-color .2s;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--violet)}
+  .card-inner{display:grid;grid-template-columns:200px 1fr;gap:0}
+  @media(max-width:640px){.card-inner{grid-template-columns:1fr}}
+  .thumb{position:relative;min-height:180px;display:flex;align-items:center;justify-content:center;padding:24px;overflow:hidden}
+  .thumb .mark{font-family:'Bricolage Grotesque';font-weight:800;font-size:2.6rem;letter-spacing:-.03em;position:relative;z-index:1;text-align:center;line-height:1}
+  .thumb.tournex{background:radial-gradient(120% 120% at 30% 20%,#3a2a7a 0%,#1a1335 60%,#120d28 100%)}
+  .thumb.tournex .mark{color:#fff}
+  .thumb.tournex .mark b{color:var(--gold)}
+  .thumb.vezir{background:radial-gradient(120% 120% at 70% 20%,#2d5d52 0%,#1a3b34 55%,#14241f 100%)}
+  .thumb.vezir .mark{color:#f0e4c4}
+  .thumb.count{background:radial-gradient(120% 120% at 50% 20%,#214a8a 0%,#15294d 60%,#101b30 100%)}
+  .thumb.count .mark{color:#dcebff}
+  .card-body{padding:26px 28px}
+  .card-body h3{font-family:'Bricolage Grotesque';font-weight:800;font-size:1.4rem;letter-spacing:-.01em;margin-bottom:7px}
+  .card-body .role{color:var(--fog);font-size:.85rem;margin-bottom:14px}
+  .card-body p{color:#c5c9e8;font-size:.97rem;margin-bottom:18px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .tag{font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:5px 10px;border-radius:6px;background:var(--ink-3);color:#b9bee4;border:1px solid var(--line)}
+  .card-links{display:flex;gap:18px;flex-wrap:wrap}
+  .card-links a{font-size:.9rem;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:6px;transition:gap .2s}
+  .card-links a:hover,.card-links a:focus-visible{gap:10px}
+  .card-links a.muted{color:var(--fog)}
+
+  /* ---- skills ---- */
+  .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:700px){.skill-grid{grid-template-columns:1fr}}
+  .skill{border:1px solid var(--line);border-radius:14px;background:var(--ink-2);padding:24px}
+  .skill h4{font-family:'Bricolage Grotesque';font-weight:600;font-size:1.05rem;margin-bottom:12px;color:var(--gold)}
+  .skill ul{list-style:none}
+  .skill li{padding:5px 0;color:#c5c9e8;font-size:.94rem;display:flex;align-items:center;gap:9px}
+  .skill li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--violet);flex:none}
+
+  /* ---- contact ---- */
+  .contact{text-align:center;border-top:1px solid var(--line)}
+  .contact .sec-title{margin-bottom:18px}
+  .contact .sub{color:#c5c9e8;max-width:48ch;margin:0 auto 34px;font-size:1.08rem}
+  .contact .cta-row{justify-content:center}
+  footer{border-top:1px solid var(--line);padding:30px 0}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+  footer .mono{font-size:.74rem}
+  footer .social{display:flex;gap:20px}
+  footer .social a{color:var(--fog);font-size:.85rem;transition:color .2s}
+  footer .social a:hover,footer .social a:focus-visible{color:var(--gold)}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .reveal{opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+  a:focus-visible,.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <div class="brand">Mahmoud<span>.</span></div>
+    <div class="links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="glow v"></div>
+  <div class="glow g"></div>
+  <div class="wrap">
+    <div class="status">
+      <span class="dot"></span>
+      <span class="mono">Available for freelance &amp; remote work</span>
+    </div>
+    <h1>I build complete, <span class="grad">working products.</span></h1>
+    <p class="lede">I'm Mahmoud Elzouhary, a mobile and web developer. I take ideas from empty folder to something real people use — from a live eFootball tournament platform to a Bosphorus restaurant booking its tables online.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#work">See my work →</a>
+      <a class="btn btn-ghost" href="https://github.com/mahmoudelzouhary10" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="mono">Selected work</span></div>
+    <h2 class="sec-title reveal" style="margin-bottom:40px">Three projects, shipped end to end.</h2>
+
+    <div class="proj">
+
+      <article class="card reveal">
+        <div class="card-inner">
+          <div class="thumb tournex"><div class="mark">TOURNE<b>X</b></div></div>
+          <div class="card-body">
+            <h3>Tournex</h3>
+            <div class="role">Flutter · Firebase · Mobile app — live, with real users</div>
+            <p>A competitive eFootball tournament platform with three tournament formats, real-time scoring, live leaderboards, market-value tracking, an in-app feed, and an admin panel. Built around keeping match state consistent for everyone at once.</p>
+            <div class="tags">
+              <span class="tag">Flutter</span>
+              <span class="tag">Cloud Firestore</span>
+              <span class="tag">Firebase Auth</span>
+              <span class="tag">Real-time</span>
+              <span class="tag">FCM</span>
+            </div>
+            <div class="card-links">
+              <a href="https://github.com/mahmoudelzouhary10/tournex" target="_blank" rel="noopener">View code →</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-inner">
+          <div class="thumb vezir"><div class="mark">Vezir<br>Han</div></div>
+          <div class="card-body">
+            <h3>Vezir Han Emirgan</h3>
+            <div class="role">HTML · CSS · JavaScript — responsive restaurant website</div>
+            <p>A trilingual single-page site (Arabic · English · Turkish) for a 24/7 Bosphorus restaurant in Istanbul. Full RTL support for Arabic, a categorised menu, and a WhatsApp-based reservation flow that captures bookings with no backend.</p>
+            <div class="tags">
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">RTL / i18n</span>
+              <span class="tag">Responsive</span>
+            </div>
+            <div class="card-links">
+              <a href="https://mahmoudelzouhary10.github.io/vezirhan/" target="_blank" rel="noopener">Live site →</a>
+              <a class="muted" href="https://github.com/mahmoudelzouhary10/vezirhan" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-inner">
+          <div class="thumb count"><div class="mark">00:00</div></div>
+          <div class="card-body">
+            <h3>Count Up</h3>
+            <div class="role">Vanilla JavaScript — live countdown timer</div>
+            <p>A dependency-free countdown that updates every second, converting a time difference into days, hours, minutes, and seconds. A compact exercise in date math and keeping a UI in sync with real time.</p>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3</span>
+              <span class="tag">No dependencies</span>
+            </div>
+            <div class="card-links">
+              <a href="https://mahmoudelzouhary10.github.io/Senegal-counter-/" target="_blank" rel="noopener">Live demo →</a>
+              <a class="muted" href="https://github.com/mahmoudelzouhary10/Senegal-counter-" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="mono">About</span></div>
+    <div class="about-grid">
+      <div class="reveal">
+        <h2 class="sec-title" style="margin-bottom:24px">I care about shipping things that actually work.</h2>
+        <p>Most of what I know, I learned by building — picking a real problem, getting a first version running, and fixing it until it holds up in someone's hands. <strong>Tournex</strong> taught me the most: it isn't a demo, it has real users, and that means the hard parts (consistent state, live updates, edge cases) had to be solved for real.</p>
+        <p>I work across <strong>mobile and web</strong> — Flutter and Firebase for apps, plain HTML/CSS/JavaScript for fast, responsive sites — and I'm comfortable moving between <strong>Arabic, English, and Turkish</strong>, which helps when a product needs to speak to more than one audience.</p>
+        <p>I'm early in my journey and honest about that. What I bring is the willingness to figure things out, clean and organised code, and follow-through to the finish.</p>
+      </div>
+      <div class="facts reveal">
+        <div class="row"><span class="k">Focus</span><span class="val">Mobile &amp; Web</span></div>
+        <div class="row"><span class="k">Mobile</span><span class="val">Flutter · Firebase</span></div>
+        <div class="row"><span class="k">Web</span><span class="val">HTML · CSS · JS</span></div>
+        <div class="row"><span class="k">Languages</span><span class="val">AR · EN · TR</span></div>
+        <div class="row"><span class="k">Based in</span><span class="val">Türkiye</span></div>
+        <div class="row"><span class="k">Status</span><span class="val">Open to work</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="mono">What I work with</span></div>
+    <h2 class="sec-title reveal" style="margin-bottom:38px">Skills &amp; tools</h2>
+    <div class="skill-grid">
+      <div class="skill reveal">
+        <h4>Mobile</h4>
+        <ul>
+          <li>Flutter &amp; Dart</li>
+          <li>Firebase Auth</li>
+          <li>Cloud Firestore</li>
+          <li>Cloud Messaging</li>
+          <li>Real-time data &amp; streams</li>
+        </ul>
+      </div>
+      <div class="skill reveal">
+        <h4>Web</h4>
+        <ul>
+          <li>HTML5 &amp; CSS3</li>
+          <li>JavaScript</li>
+          <li>Responsive layout</li>
+          <li>RTL &amp; multilingual UI</li>
+          <li>GitHub Pages</li>
+        </ul>
+      </div>
+      <div class="skill reveal">
+        <h4>Workflow</h4>
+        <ul>
+          <li>Git &amp; GitHub</li>
+          <li>Clean, organised code</li>
+          <li>Cloudinary media</li>
+          <li>Debugging &amp; problem-solving</li>
+          <li>Shipping to release</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="justify-content:center"><span class="mono">Get in touch</span></div>
+    <h2 class="sec-title reveal">Have something to build?</h2>
+    <p class="sub reveal">Whether it's a mobile app, a responsive website, or fixing up an existing project — tell me what you need and let's talk.</p>
+    <div class="cta-row reveal">
+      <a class="btn btn-primary" href="mailto:your-email@example.com">Email me →</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/mahmoud-elzouhary" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="mono">© 2026 Mahmoud Elzouhary</span>
+    <div class="social">
+      <a href="https://github.com/mahmoudelzouhary10" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/mahmoud-elzouhary" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20));
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
